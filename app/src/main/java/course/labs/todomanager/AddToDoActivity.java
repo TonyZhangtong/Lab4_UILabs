@@ -90,30 +90,25 @@ public class AddToDoActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 
-
-
-				// TODO - Indicate result and finish
-
-                
+				log("Entered cancelButton.OmClickListener.onClick()");
+				finish();
                 
 			}
 		});
 
-		// TODO - Set up OnClickListener for the Reset Button
+
 		final Button resetButton = (Button) findViewById(R.id.resetButton);
 		resetButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 
-
-				// TODO - Reset data to default values
-
-
-                
-                
-                
-				// reset date and time
+				log("Entered resetButton.onClickListener.onClick()");
+				mTitleText.setText("");
+				mDefaultStatusButton.setChecked(true);
+				mDefaultPriorityButton.setChecked(true);
 				setDefaultDateTime();
+
+				// reset date and time
 
 			}
 		});
@@ -128,34 +123,30 @@ public class AddToDoActivity extends Activity {
 
 				// gather ToDoItem data
 
+                log("Entered submitButton.OnClickListener.onclick()");
 
-				// TODO - Get the current Priority
-				Priority priority = null;
+				Priority priority = getPriority();
 
-				// TODO - Get the current Status
-				Status status = null;
-
-				// TODO - Get the current ToDoItem Title
+				Status status = getStatus();
 
 
-				String titleString = null;
+
+
+				String titleString = mTitleText.getText().toString();
+				String fullDate = dateString + " " + timeString;
 
 
 				// Construct the Date string
-				String fullDate = dateString + " " + timeString;
 
 				// Package ToDoItem data into an Intent
 				Intent data = new Intent();
 				ToDoItem.packageIntent(data, titleString, priority, status,
 						fullDate);
 
-				// TODO - return data Intent and finish
+				//
+                setResult(RESULT_OK, data);
+				finish();
 
-
-
-
-            
-            
 			}
 		    });
 	}
@@ -303,4 +294,12 @@ public class AddToDoActivity extends Activity {
 		DialogFragment newFragment = new TimePickerFragment();
 		newFragment.show(getFragmentManager(), "timePicker");
 	}
+	private void log(String msg) {
+		try {
+			Thread.sleep(500);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		Log.i(TAG, msg);
+    }
 }

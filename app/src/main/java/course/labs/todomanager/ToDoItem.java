@@ -28,7 +28,7 @@ public class ToDoItem {
 	public final static SimpleDateFormat FORMAT = new SimpleDateFormat(
 			"yyyy-MM-dd HH:mm:ss", Locale.US);
 
-	private String mTitle = new String();
+	private static String mTitle = new String();
 	private Priority mPriority = Priority.LOW;
 	private Status mStatus = Status.NOTDONE;
 	private Date mDate = new Date();
@@ -55,7 +55,7 @@ public class ToDoItem {
 		}
 	}
 
-	public String getTitle() {
+	public static String getTitle() {
 		return mTitle;
 	}
 
